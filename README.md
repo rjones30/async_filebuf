@@ -2,7 +2,7 @@
 Plug-in replacement for std::filebuf providing asynchronous read-ahead and buffered quasi-random access.
 
 # What
-This project was created to meet a need for an ifstream class that provides a more flexible scheme for read access to a file-oriented stream coming from a high-latency source. In my use case, this high-latency source is xrootd (see [http://xrootd.org]) which aims at giving high performance, scalable fault tolerant access to data repositories of many kinds. There are multiple ways to access data over xrootd, but the one most interesting to me is the userspace preload library libXrdPosixPreload.so which allows an application to issue an ordinary open on an ifstream to a url like
+This project was created to meet a need for an ifstream class that provides a flexible scheme for read access to a file-oriented stream coming from a high-latency source. In my use case, this high-latency source is xrootd (see [http://xrootd.org]) which aims at giving high performance, scalable fault tolerant access to data repositories of many kinds. There are multiple ways to access data over xrootd, but the one most interesting to me is the userspace preload library libXrdPosixPreload.so which allows an application to issue an ordinary open on an ifstream to a url like
 
 ```
 root://nod29.phys.uconn.edu/Gluex/rawdata/PSskims/Run010593/hd_rawdata_010593_000.ps.evio
