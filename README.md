@@ -1,2 +1,2 @@
 # async_filebuf
-plug-in replacement for std::filebuf providing asynchronous read-ahead and buffered quasi-random access.
+Plug-in replacement for std::filebuf providing asynchronous read-ahead and buffered quasi-random access.
