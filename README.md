@@ -15,7 +15,7 @@ Of course I could copy the file to local storage first, and then access it from 
 
 # How
 
-Suppose I have an application class that opens an input file as follows, where my_input_data_file may be any valid filename, including the xrootd-style url listed as an example above.
+Suppose I have an application class that opens an input file as follows, where my_input_data_file may be any valid file on a locally mounted filesystem, or an xrootd-style url like the one listed above.
 
 ```
 #include <fstream>
