@@ -23,7 +23,7 @@ Suppose I have an application class that opens an input file as follows, where m
 std::ifstream ifs("my_input_data_file");
 ```
 
-This code should be modified as follows to use the async_filebuf read-ahead buffering class.
+This code should be modified as follows to use the async_filebuf read-ahead buffering class. No other changes to the application code are needed. The g++ compiler needs the options "--std=c++11" and "-pthread" to build any application using async_filebuf.
 
 ```
 #include <fstream>
@@ -42,5 +42,16 @@ The arguments to the async_filebuf constructor are as follows.
 2. **chunks_ahead** - maximum number of chunks to be held in memory at a time, 5 in the above example.
 
 3. **chunks_lookback** -- number of chunks behind the present read position that should be kept in memory before being recycled for filling by the read-ahead algorithm, 1 in the above example.
+
+Constructing an async_filebuf with chunks_lookback=0 effectively disables buffering, providing a convenient means to compare the performance of your application with and without the read-ahead and buffering functionality of async_filebuf.
+
+An example program t.cc is provided. The distributed code tries to open an input file over xrootd, so if you do not have the xrootd preload library installed in your shell environment you should edit t.cc and change the name of the input file before running the test as follows.
+
+```
+$ make
+$ ./t
+```
+
+If the build was successful and the input file could be opened, you should see a sequence of output lines describing the sequence of reads from the input file, with interspersed seeks. 
 
 The chunks_loopback parameter should be set to the maximum size of a relative movement forward or backward on the stream (e.g. using ifs.seekg) without interrupting the look-ahead streaming loop. Steps forward or backward larger than chunk_size\*chunks_lookback will trigger a flush of the read-ahead buffer, to be restarted on the next read request. Normally, unless you are jumping ahead in large steps you want the read loop to stream continuously while the reads jump around within the look-back window.
